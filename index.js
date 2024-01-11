@@ -10,18 +10,18 @@ createServer(async (req, res) => {
 		if (url.pathname === "/") {
 			res.writeHead(301, "Redirect to main", {
 				Location: "https://unimetrics.dreamnity.in",
-				"Access-Control-Allow-Origin": "true",
+				"Access-Control-Allow-Origin": "*",
 			});
-			return res.end('API running.');
+			return res.end("API running.");
 		}
 		const result = await require("./" + join("script", url.pathname))(
 			url,
 			req,
-      res,
-      server
+			res,
+			server
 		);
 		try {
-			res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "true" });
+			res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*" });
 		} catch {}
 		try {
 			res.end(result);
@@ -29,7 +29,7 @@ createServer(async (req, res) => {
   } catch (e) {
 		try {
 			res.writeHead(500, "Internal Server Error", {
-				"Access-Control-Allow-Origin": "true",
+				"Access-Control-Allow-Origin": "*",
 			});
 		} catch {}
 		try {
