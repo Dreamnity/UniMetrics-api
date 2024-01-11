@@ -1,7 +1,9 @@
 const { createServer } = require("http");
 const { join } = require('path/posix');
 const { WebSocketServer } = require('ws');
-const server = new WebSocketServer({noServer:true})
+const server = new WebSocketServer({noServer:true});
+//check database existance
+if(!(fs=require('fs')).existsSync('database.yaml')) fs.writeFileSync('database.yaml','{}')
 createServer(async (req, res) => {
 	const url = new URL(req.url, "https://0.0.0.0");
 	try {
