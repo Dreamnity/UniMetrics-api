@@ -35,4 +35,4 @@ createServer(async (req, res) => {
 			server.emit("connection", ws, request);
 		})
 	).on('error',()=>{})
-	.listen(8000);
+	.listen(process.env.SERVER_PORT);
