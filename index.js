@@ -8,7 +8,10 @@ createServer(async (req, res) => {
 	const url = new URL(req.url, "https://0.0.0.0");
 	try {
 		if (url.pathname === "/") {
-			res.writeHead(301,'Redirect to main',{'Location':'https://unimetrics.dreamnity.in'});
+			res.writeHead(301, "Redirect to main", {
+				Location: "https://unimetrics.dreamnity.in",
+				"Access-Control-Allow-Origin": "true",
+			});
 			return res.end('API running.');
 		}
 		const result = await require("./" + join("script", url.pathname))(
@@ -18,14 +21,16 @@ createServer(async (req, res) => {
       server
 		);
 		try {
-			res.writeHead(200);
+			res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "true" });
 		} catch {}
 		try {
 			res.end(result);
 		} catch {}
   } catch (e) {
 		try {
-			res.writeHead(500);
+			res.writeHead(500, "Internal Server Error", {
+				"Access-Control-Allow-Origin": "true",
+			});
 		} catch {}
 		try {
 			res.end("Error: " + (e?.message?e?.message?.split('\n')[0]:e));
