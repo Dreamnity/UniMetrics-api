@@ -7,7 +7,10 @@ if(!(fs=require('fs')).existsSync('database.yaml')) fs.writeFileSync('database.y
 createServer(async (req, res) => {
 	const url = new URL(req.url, "https://0.0.0.0");
 	try {
-		if (url.pathname === "/") return res.end("Working");
+		if (url.pathname === "/") {
+			res.writeHead(301,{headers:{'Location':'https://unimetrics.dreamnity.in'}});
+			return res.end('API running.');
+		}
 		const result = await require("./" + join("script", url.pathname))(
 			url,
 			req,
