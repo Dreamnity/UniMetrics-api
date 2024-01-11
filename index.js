@@ -8,7 +8,7 @@ createServer(async (req, res) => {
 	const url = new URL(req.url, "https://0.0.0.0");
 	try {
 		if (url.pathname === "/") {
-			res.writeHead(301,{headers:{'Location':'https://unimetrics.dreamnity.in'}});
+			res.writeHead(301,'Redirect to main',{'Location':'https://unimetrics.dreamnity.in'});
 			return res.end('API running.');
 		}
 		const result = await require("./" + join("script", url.pathname))(
