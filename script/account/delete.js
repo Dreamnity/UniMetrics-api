@@ -8,7 +8,7 @@ const db = require("../../lib/database");
  */
 module.exports = (url, req, res) => {
 	const addr = req.socket.address().address;
-	if (db.get(token=url.searchParams.get("token"), "author") === addr) {
+	if (db.get(token=url.searchParams.get("token"), "author") !== addr) {
 		res.writeHead(403);
 		return "Error: Variable can only be deleted by the account owner";
 	}
