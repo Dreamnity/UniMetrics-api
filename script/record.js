@@ -20,7 +20,7 @@ module.exports = (url, req, res, server) => {
 		ws =>
 			ws.param.token === token &&
 			(ws.param.name === name || !ws.param.name) &&
-			ws.send(name + ":" + value)
+			ws.send((ws.param.name ? "" : name + ":") + value)
 	);
   return 'ok'
 };
