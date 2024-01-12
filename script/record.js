@@ -16,6 +16,11 @@ module.exports = (url, req, res, server) => {
 		name,
 		value
   );
-  server.clients.forEach(ws=>ws.param.token===token&&ws.send(name+':'+value))
+  server.clients.forEach(
+		ws =>
+			ws.param.token === token &&
+			(ws.param.name === name || !ws.param.name) &&
+			ws.send(name + ":" + value)
+	);
   return 'ok'
 };
