@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-                                   "dev": "nodemon -q -d 2 --exec \"cls && node .\""
+    "dev": "nodemon -q -d 2 --exec \"cls && node .\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "firebase-admin": "^12.0.0",
     "ws": "^8.14.2",
     "yaml": "^2.3.4"
   }
