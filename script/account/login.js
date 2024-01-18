@@ -8,8 +8,8 @@ const db = require("../../lib/database");
  * @returns
  */
 module.exports = (url, req, res) => {
-	firebase
-		.getAuth()
+	return firebase.auth
+		.getAuth(firebase.app)
 		.verifyIdToken(url.searchParams.get("token"))
 		.then(decodedToken => {
 			const uid = decodedToken.uid;
@@ -18,6 +18,6 @@ module.exports = (url, req, res) => {
 			else throw new Error("Invalid token.");
 		})
 		.catch(error => {
-			// Handle error
+			throw new Error("Firebase Error: " + error.message);
 		});
 };
