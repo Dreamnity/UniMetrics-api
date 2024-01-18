@@ -8,9 +8,11 @@ const db = require("../../lib/database");
  * @returns
  */
 module.exports = (url, req, res) => {
+  const token = url.searchParams.get("token");
+	if (!token) throw new Error("No token provided");
 	return firebase.auth
 		.getAuth(firebase.app)
-		.verifyIdToken(url.searchParams.get("token"))
+		.verifyIdToken(token)
 		.then(decodedToken => {
 			const uid = decodedToken.uid;
 			const token = db.queryNameByInfo("uid", uid);
