@@ -14,12 +14,9 @@ createServer(async (req, res) => {
 			});
 			return res.end("API running.");
 		}
-		const result = await require("./" + join("script", url.pathname))(
-			url,
-			req,
-			res,
-			server
-		);
+		const result = await (
+			await require("./" + join("script", url.pathname))
+		)(url, req, res, server);
 		try {
 			res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*" });
 		} catch {}
